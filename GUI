@@ -1,0 +1,197 @@
+def main_screen():
+    if "user_menu_window" in globals():
+        user_menu_window.withdraw()
+    global main_window
+    main_window = tk.Tk()
+    main_window.title("Auto Gallery Program")
+    main_window.geometry("550x250+400+150")
+    main_window.resizable(False, False)
+
+    label = tk.Label(main_window, text="Welcome to Auto Gallery Program", fg="black", bg="grey",
+                     font="Times 25 bold")
+    label.pack(fill=tk.X)
+    label1 = tk.Label(main_window, text="Username:", fg="black", font="Times 18 bold")
+    label1.place(x=20, y=60)
+    label2 = tk.Label(main_window, text="Password:", fg="black", font="Times 18 bold")
+    label2.place(x=20, y=100)
+
+    username = tk.StringVar()
+    password = tk.StringVar()
+
+    e1 = tk.Entry(main_window, textvariable=username, font="Times 18", bg="dark grey")
+    e1.place(x=150, y=60)
+    e2 = tk.Entry(main_window, textvariable=password, font="Times 18", bg="dark grey", show="*")
+    e2.place(x=150, y=100)
+
+    b1 = tk.Button(main_window, text="Sign in", bg="orange", font="Times 20 bold", command=lambda: admin_entrance(username.get(), password.get()))
+    b1.place(x=0, y=150, width=550)
+    b2 = tk.Button(main_window, text="QUIT", bg="orange", font="Times 20 bold", command=main_window.destroy)
+    b2.place(x=0, y=200, width=550)
+
+    main_window.mainloop()
+
+
+def user_menu_screen():
+
+    if "advertised_car_window" in globals():
+        advertised_car_window.withdraw()
+    if "advertise_car_window" in globals():
+        advertise_car_window.withdraw()
+    if "add_car_window" in globals():
+        add_car_window.withdraw()
+    if "car_list_window" in globals():
+        car_list_window.withdraw()
+    if "main_window" in globals():
+        main_window.withdraw()
+    global user_menu_window
+    user_menu_window = tk.Tk()
+    user_menu_window.title("Auto Gallery Program")
+    user_menu_window.geometry("550x360+400+150")
+    user_menu_window.resizable(False, False)
+
+    label = tk.Label(user_menu_window, text="Welcome", fg="black", bg="grey", font="Times 25 bold")
+    label.pack(fill=tk.X)
+
+    b0 = tk.Button(user_menu_window, text="Advertised car list", bg="orange", font="Times 20 bold", command=advertised_car_screen)
+    b0.place(x=10, y=50,  width=530)
+    b1 = tk.Button(user_menu_window, text="Show car list", bg="orange", font="Times 20 bold", command=car_list_screen)
+    b1.place(x=10, y=100, width=530)
+    b9 = tk.Button(user_menu_window, text="Delete all lists", bg="orange", font="Times 20 bold", command=delete_lists)
+    b9.place(x=10, y=150, width=530)
+    b2 = tk.Button(user_menu_window, text="Add car", bg="orange", font="Times 20 bold", command=add_car_screen)
+    b2.place(x=10, y=200, width=530)
+    b4 = tk.Button(user_menu_window, text="Advertise", bg="orange", font="Times 20 bold", command=advertise_car_screen)
+    b4.place(x=10, y=250, width=530)
+    b4 = tk.Button(user_menu_window, text="QUIT", bg="orange", font="Times 20 bold", command=main_screen)
+    b4.place(x=10, y=300, width=530)
+
+    user_menu_window.mainloop()
+
+def delete_lists():
+    response=messagebox.askquestion(message="Are you sure to delete all lists?")
+    if response == "yes":
+        cars.clear()
+        advertised_cars.clear()
+        messagebox.showinfo(message="The lists has been deleted")
+
+
+def car_list_screen():
+    if "user_menu_window" in globals():
+        user_menu_window.destroy()
+    global car_list_window
+    car_list_window = tk.Tk()
+    car_list_window.title("Auto Gallery Program")
+    #car_list_window.geometry("450x280+400+150")
+    car_list_window.resizable(False, True)
+
+    label0 = tk.Label(car_list_window, text="Car List", bg="grey", font="Times 25 bold")
+    label0.grid(row=0, column=0, columnspan=8)
+    label1 = tk.Label(car_list_window, text="Brand", bg="orange", font="Times 18 bold")
+    label1.grid(row=1, column=0)
+    label2 = tk.Label(car_list_window, text="Model", bg="orange", font="Times 18 bold")
+    label2.grid(row=1, column=1)
+    label3 = tk.Label(car_list_window, text="Year", bg="orange", font="Times 18 bold")
+    label3.grid(row=1, column=2)
+    label4 = tk.Label(car_list_window, text="Engine", bg="orange", font="Times 18 bold")
+    label4.grid(row=1, column=3)
+    label5 = tk.Label(car_list_window, text="HP", bg="orange", font="Times 18 bold")
+    label5.grid(row=1, column=4)
+    label6 = tk.Label(car_list_window, text="Km", bg="orange", font="Times 18 bold")
+    label6.grid(row=1, column=5)
+    label7 = tk.Label(car_list_window, text="Color", bg="orange", font="Times 18 bold")
+    label7.grid(row=1, column=6)
+    b1 = tk.Button(car_list_window, text="Back", bg="orange", command=user_menu_screen)
+    b1.grid(row=k+2,column=0)
+
+    car_list_window.mainloop()
+    
+    def advertised_car_screen():
+
+    if "user_menu_window" in globals():
+        user_menu_window.destroy()
+    global advertised_car_window
+    advertised_car_window = tk.Tk()
+    advertised_car_window.title("Auto Gallery Program")
+    #advertised_car_window.geometry("520x280+400+150")
+    advertised_car_window.resizable(False, True)
+
+    label0 = tk.Label(advertised_car_window, text="Advertised car list", bg="grey", font="Times 25 bold")
+    label0.grid(row=0, column=0, columnspan=9)
+    label1 = tk.Label(advertised_car_window, text="Brand", bg="orange", font="Times 18 bold")
+    label1.grid(row=1, column=0)
+    label2 = tk.Label(advertised_car_window, text="Model", bg="orange", font="Times 18 bold")
+    label2.grid(row=1, column=1)
+    label3 = tk.Label(advertised_car_window, text="Year", bg="orange", font="Times 18 bold")
+    label3.grid(row=1, column=2)
+    label4 = tk.Label(advertised_car_window, text="Engine", bg="orange", font="Times 18 bold")
+    label4.grid(row=1, column=3)
+    label5 = tk.Label(advertised_car_window, text="HP", bg="orange", font="Times 18 bold")
+    label5.grid(row=1, column=4)
+    label6 = tk.Label(advertised_car_window, text="Km", bg="orange", font="Times 18 bold")
+    label6.grid(row=1, column=5)
+    label7 = tk.Label(advertised_car_window, text="Color", bg="orange", font="Times 18 bold")
+    label7.grid(row=1, column=6)
+    label6 = tk.Label(advertised_car_window, text="Damage", bg="orange", font="Times 18 bold")
+    label6.grid(row=1, column=7)
+    label7 = tk.Label(advertised_car_window, text="Price", bg="orange", font="Times 18 bold")
+    label7.grid(row=1, column=8)
+    b1 = tk.Button(advertised_car_window, text="Back", bg="orange", command=user_menu_screen)
+    b1.grid(row=k+2,column=0)
+
+    advertised_car_window.mainloop()
+    
+    def add_car_screen():
+    if "user_menu_window" in globals():
+        user_menu_window.destroy()
+    global add_car_window
+    add_car_window = tk.Tk()
+    add_car_window.title("Auto Gallery Program")
+    add_car_window.geometry("450x480+400+150")
+    add_car_window.resizable(False, False)
+
+    label = tk.Label(add_car_window, text="Add Car", fg="black", bg="grey", font="Times 25 bold")
+    label.pack(fill=tk.X)
+    label1 = tk.Label(add_car_window, text="Brand:", fg="black", font="Times 18 bold")
+    label1.place(x=20, y=60)
+    label2 = tk.Label(add_car_window, text="Model:", fg="black", font="Times 18 bold")
+    label2.place(x=20, y=110)
+    label3 = tk.Label(add_car_window, text="Year:", fg="black", font="Times 18 bold")
+    label3.place(x=20, y=160)
+    label4 = tk.Label(add_car_window, text="Engine:", fg="black", font="Times 18 bold")
+    label4.place(x=20, y=210)
+    label5 = tk.Label(add_car_window, text="HP:", fg="black", font="Times 18 bold")
+    label5.place(x=20, y=260)
+    label6 = tk.Label(add_car_window, text="KM:", fg="black", font="Times 18 bold")
+    label6.place(x=20, y=310)
+    label7 = tk.Label(add_car_window, text="Color:", fg="black", font="Times 18 bold")
+    label7.place(x=20, y=360)
+    e1 = tk.Entry(add_car_window, font="Times 20", bg="dark grey")
+    e1.place(x=120, y=60)
+    brand=e1
+    e2 = tk.Entry(add_car_window, font="Times 20", bg="dark grey")
+    e2.place(x=120, y=110)
+    model=e2
+    e3 = tk.Entry(add_car_window, font="Times 20", bg="dark grey")
+    e3.place(x=120, y=160)
+    year=e3
+    e4 = tk.Entry(add_car_window, font="Times 20", bg="dark grey")
+    e4.place(x=120, y=210)
+    engine=e4
+    e5 = tk.Entry(add_car_window, font="Times 20", bg="dark grey")
+    e5.place(x=120, y=260)
+    hp=e5
+    e6 = tk.Entry(add_car_window, font="Times 20", bg="dark grey")
+    e6.place(x=120, y=310)
+    km=e6
+    e7 = tk.Entry(add_car_window, font="Times 20", bg="dark grey")
+    e7.place(x=120, y=360)
+    color=e7
+
+
+    b1 = tk.Button(add_car_window, text="Add", font="Times 20 bold", bg="orange", command=lambda: make_dict(brand.get(), model.get(),
+                                                                                                      year.get(),engine.get(),
+                                                                                                      hp.get(),km.get(),color.get()))
+    b1.place(x=20, y=410, width=195)
+    b2 = tk.Button(add_car_window, text="Back", font="Times 20 bold", bg="orange", command=user_menu_screen)
+    b2.place(x=235, y=410, width=195)
+
